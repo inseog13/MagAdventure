@@ -1,0 +1,4 @@
+repository "MagAdventure 2025-09-24_20-12-46/MagAdventure@14569681291130@cloud"
+  path "/"
+    br "/main"
+    co "/main"
