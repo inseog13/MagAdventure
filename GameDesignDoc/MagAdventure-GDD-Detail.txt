@@ -7,6 +7,20 @@ UI/UX (간단하고 직관적), 사운드 (효과음 + BGM)－전지환
 각자 한거나 할거 일지처럼 작성하심 됩니다. 뭘 해야할지는 GDD를 보고 하시면 될거같아요.
 GDD(기획서)가 줄가고 여기는 잎이라 생각하시면 돼요.
 
+0. 초기셋팅: 
+
+    송인석: 
+    임시로 New Platformer Pack — Kenney 에셋 추가
+    임시로 playerController 추가
+    임시로 바닥 구성
+    palyer에게 rigidbody2D, capsuleCollider2D 컴포넌트 추가
+    임시로 playerIdle.anim, playerWalk.anim, playerJump.anim 추가(다음에)
+
+    전지환: 
+
+    최혁도 선배님: 
+
+
 1. 초원: 
 플레이 타임: 5분 - 10분
 
@@ -49,6 +63,14 @@ GDD(기획서)가 줄가고 여기는 잎이라 생각하시면 돼요.
 
 5. 피라미드:
 플레이 타임: 10분 - 20분
+
+    송인석: 
+
+    전지환: 
+
+    최혁도 선배님: 
+
+6. 기타:
 
     송인석: 
 
