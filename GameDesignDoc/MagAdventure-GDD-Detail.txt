@@ -14,7 +14,7 @@ GDD(기획서)가 줄가고 여기는 잎이라 생각하시면 돼요.
     임시로 playerController 추가
     임시로 바닥 구성
     palyer에게 rigidbody2D, capsuleCollider2D 컴포넌트 추가
-    임시로 playerIdle.anim, playerWalk.anim, playerJump.anim 추가(다음에)
+    임시로 playerIdle.anim, playerWalk.anim, playerJump.anim 추가
 
     전지환: 
 
