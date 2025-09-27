@@ -17,6 +17,8 @@ GDD(기획서)가 줄가고 여기는 잎이라 생각하시면 돼요.
     임시로 playerIdle.anim, playerWalk.anim, playerJump.anim 추가
     맵 보강 및 새로운 데코용 타일맵 생성
     임시배경 추가
+    UI 및 이펙트 어울리나 확인할겸 New Platformer Pack — Kenney, Cursor Pack—Kenney, Particle Pack—Kenney, emotion Pack—Kenney, ui Pack—Kenney 추가
+    임시 UI셋팅 및, 설정아이콘 구성
 
     전지환: 
 
