@@ -3568,6 +3568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1507422575}
+  - component: {fileID: 1507422576}
   m_Layer: 0
   m_Name: temp_obj
   m_TagString: Untagged
@@ -3597,6 +3598,19 @@ Transform:
   - {fileID: 1279145516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1507422576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507422574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d208e3bcbdbd25a479ced959e29e5eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Platformer.View.ParallaxLayer
+  movementScale: {x: 0.9, y: 0.9, z: 0.9}
 --- !u!1 &1703751390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4231,6 +4245,7 @@ GameObject:
   - component: {fileID: 2045017940}
   - component: {fileID: 2045017939}
   - component: {fileID: 2045017938}
+  - component: {fileID: 2045017941}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4305,21 +4320,36 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045017937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045017941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045017937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c17133d462cf445834f3fcc1563f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollowX
+  player: {fileID: 533280659}
+  smoothSpeed: 1
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2045017940}
+  - {fileID: 533280659}
   - {fileID: 313400036}
   - {fileID: 1382251275}
-  - {fileID: 533280659}
   - {fileID: 1507422575}
   - {fileID: 273754721}
   - {fileID: 44946721}
