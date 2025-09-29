@@ -20,7 +20,7 @@ GDD(기획서)가 줄가고 여기는 잎이라 생각하시면 돼요.
     UI 및 이펙트 어울리나 확인할겸 New Platformer Pack — Kenney, Cursor Pack—Kenney, Particle Pack—Kenney, emotion Pack—Kenney, ui Pack—Kenney 추가
     임시 UI셋팅 및, 설정아이콘 구성
     배경에 공간감을 주는 ParallxLayer.cs 임시배경에 추가, 카메라가 플레이어를 따라가도록 횡스크롤에 맞춰 CameraFollowX.cs 추가
-    맵 확장
+    MagneticForceNewInput으로 자석능력 구현(불안정)
 
     전지환: 
 
