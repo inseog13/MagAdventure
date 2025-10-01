@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class MagneticForceNewInput : MonoBehaviour
+public class MagForceNewInput : MonoBehaviour
 {
     [Header("Magnet Settings")]
     public float radius = 5f;
@@ -15,6 +14,8 @@ public class MagneticForceNewInput : MonoBehaviour
     private PlayerControls controls;
     private bool isAttracting = false;
     private bool isRepelling = false;
+
+    [SerializeField] private LayerMask magneticLayer;  // Inspector에서 MagneticObject 레이어만 선택
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class MagneticForceNewInput : MonoBehaviour
 
     private void Update()
     {
-        // ✅ 척력이 우선
+        // 척력이 우선
         if (isRepelling)
         {
             repelTimer += Time.deltaTime;
@@ -59,20 +60,21 @@ public class MagneticForceNewInput : MonoBehaviour
 
     private void ApplyForce(bool isAttract, float timer)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, magneticLayer);
 
         foreach (var hit in hits)
         {
             if (hit.attachedRigidbody != null && hit.gameObject != gameObject)
             {
                 Vector2 direction = (hit.transform.position - transform.position).normalized;
-                if (isAttract) direction = -direction; // 인력: 나에게 당김
+                if (isAttract) direction = -direction;
 
                 float strength = Mathf.Lerp(0, maxForce, timer / maxTimer);
                 hit.attachedRigidbody.AddForce(direction * strength * forceMultiplier * Time.deltaTime, ForceMode2D.Force);
             }
         }
     }
+
 
     private void OnDrawGizmosSelected()
     {
