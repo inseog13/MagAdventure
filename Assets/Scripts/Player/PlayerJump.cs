@@ -17,6 +17,12 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     float maxVelocityY;
 
+    //사운드 관련 변수 추가
+    [Header("Sound Setting")]
+    [SerializeField]
+    private AudioClip jumpSoundClip;
+    private AudioSource audioSource;
+
     Rigidbody2D body;
     Animator anim;
     Collider2D coll;
@@ -26,6 +32,12 @@ public class PlayerJump : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = FindFirstObjectByType<CompositeCollider2D>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void FixedUpdate()
@@ -107,6 +119,11 @@ public class PlayerJump : MonoBehaviour
             return;
 
         body.AddForceY(jumpPower, ForceMode2D.Impulse);
+
+        if (jumpSoundClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpSoundClip);
+        }
 
         //캐쥬얼한 게임 한정 bec.리소스 많이먹음;
         //SendMessage("SetVertical", jumpPower);
