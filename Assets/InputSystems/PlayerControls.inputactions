@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "f5d2b191-33af-48a8-91ef-86967b90579f",
+            "actions": [
+                {
+                    "name": "Attract",
+                    "type": "Button",
+                    "id": "75658d21-4793-4ad6-8c83-b6a05ac6a5a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Repel",
+                    "type": "Button",
+                    "id": "150eafca-dc00-43e6-842c-b24468bda6f5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "87b1b513-5873-41b1-af3f-d751052a7159",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78e7e9c4-7318-4cc5-b008-5f893a219a2d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Repel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
