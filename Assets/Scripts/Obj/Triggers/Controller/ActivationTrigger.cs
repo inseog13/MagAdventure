@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ControlType { None, Move, Toggle, SetActive }
+public enum ControlType { None, Move, Rotate, Toggle, SetActive }
 
 public class ActivationTrigger : MonoBehaviour
 {
@@ -16,13 +16,21 @@ public class ActivationTrigger : MonoBehaviour
     [Tooltip("Delay before the action starts.")]
     public float delayTime = 0f;
 
-    [Header("Move Control Settings")]
-    [Tooltip("The relative distance the target will move. e.g., (0, 3, 0) moves 3 units up.")]
-    public Vector3 moveOffset = Vector3.zero;
-    [Tooltip("The time taken for the movement.")]
+    [Header("Move/Rotate Control Settings")]
+    [Tooltip("The time taken for the action (Move or Rotate).")]
+
     public float duration = 1f;
     [Tooltip("The easing function used for movement interpolation.")]
+
     public MoveObject.EasingMode easingMode = MoveObject.EasingMode.None;
+
+    [Header("Move Settings (ControlType: Move)")]
+    [Tooltip("The relative distance the target will move. e.g., (0, 3, 0) moves 3 units up.")]
+    public Vector3 moveOffset = Vector3.zero;
+
+    [Header("Rotate Settings (ControlType: Rotate)")] // 👈 Rotate 설정 추가
+    [Tooltip("The rotation to apply in Euler angles (degrees). e.g., (0, 0, 90) rotates 90 degrees on Z.")]
+    public Vector3 rotationOffset = Vector3.zero;
 
     [Header("SetActive Control Settings")]
     [Tooltip("If true, targets are set active. If false, targets are set inactive.")]
@@ -53,6 +61,15 @@ public class ActivationTrigger : MonoBehaviour
                             {
                                 // Pass all movement data from the trigger to the object
                                 moveScript.ActivateMovement(moveOffset, duration, delayTime, easingMode);
+                            }
+                            break;
+
+                        case ControlType.Rotate:
+                            MoveObject rotateScript = groupObject.GetComponent<MoveObject>();
+                            if (rotateScript != null)
+                            {
+                                // MoveObject의 ActivateRotation 메서드를 호출
+                                rotateScript.ActivateRotation(rotationOffset, duration, delayTime, easingMode);
                             }
                             break;
                             
