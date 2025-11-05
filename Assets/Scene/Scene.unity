@@ -3759,6 +3759,7 @@ GameObject:
   - component: {fileID: 533280656}
   - component: {fileID: 533280661}
   - component: {fileID: 533280662}
+  - component: {fileID: 533280663}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4011,6 +4012,23 @@ MonoBehaviour:
   magneticLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!320 &533280663
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533280653}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 408eb5d066d08fb4592ee42dffb07a84, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &594155846
 GameObject:
   m_ObjectHideFlags: 0
@@ -4596,7 +4614,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
