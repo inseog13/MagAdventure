@@ -4,45 +4,53 @@ public class ParallaxScrolling : MonoBehaviour
 {
     [Header("Parallax Settings")]
     [Tooltip("카메라 이동에 대한 배경의 상대 속도 (0에 가까울수록 느림)")]
-    [Range(0f, 2f)]
+    [Range(0f, 1f)] // 1을 넘어가면 배경이 카메라보다 빠르게 움직임
     public float parallaxEffect = 0.5f;
 
-    [Tooltip("배경 스프라이트의 실제 월드 유닛 너비 (Width 256, PPU 64이므로 4.0)")]
-    public float backgroundWidth = 4.0f; // ★ 4.0으로 설정 확인
+    [Tooltip("배경 스프라이트의 실제 월드 유닛 너비")]
+    public float backgroundWidth = 8.0f; // ★ 사용자 설정값 8.0
 
     [Header("References")]
     public Transform cameraTransform;
 
-    // 카메라에 대한 배경의 초기 상대 위치 오프셋
-    private float initialOffsetFromCamera;
+    // 카메라의 '초기 X 위치'
+    private float cameraStartX;
+
+    // 배경의 '초기 X 위치'
+    private float backgroundStartX;
 
     void Start()
     {
         if (cameraTransform == null || backgroundWidth <= 0)
         {
-            Debug.LogError("필수 설정이 누락되었습니다.");
+            Debug.LogError("필수 설정이 누락되었습니다. 카메라 Transform과 배경 너비를 확인하세요.");
             enabled = false;
             return;
         }
 
-        // 1. 배경과 카메라의 초기 상대 거리를 저장합니다.
-        // 이 거리가 패럴랙스 효과를 통해 유지되어야 합니다.
-        initialOffsetFromCamera = transform.position.x - cameraTransform.position.x;
+        // 1. 초기 기준점 저장
+        // 카메라가 움직이기 시작하는 기준 위치를 저장합니다.
+        cameraStartX = cameraTransform.position.x;
+        
+        // 배경의 시작 위치를 저장합니다. 이 위치를 기준으로 배경이 루프됩니다.
+        backgroundStartX = transform.position.x;
     }
 
     void LateUpdate()
     {
-        // 1. 패럴랙스 기준점 계산
-        // 카메라가 이동한 거리(Camera.x - Camera.initial.x)를
-        // 패럴랙스 효과를 적용하여 배경이 얼마나 '밀려나야' 하는지 계산합니다.
-        // (1 - parallaxEffect)를 곱하는 것이 핵심입니다.
-        // parallaxEffect가 0.5이면, 카메라는 10 이동할 때 배경은 5만큼 덜 움직여야 합니다.
-        float parallaxMovementX = cameraTransform.position.x * (1 - parallaxEffect);
+        // 1. 카메라 이동 거리 계산
+        // 카메라가 시작점으로부터 얼마나 멀리 이동했는지 계산합니다.
+        float cameraDisplacement = cameraTransform.position.x - cameraStartX;
 
-        // 2. 무한 루프 오프셋 계산 (Modulo 연산으로 루프 사이클을 만듭니다)
-        // C#의 % 연산은 음수 결과가 나올 수 있으므로, 정확한 루프를 위해 양수 결과를 보장합니다.
-        // 배경이 루프 너비(4.0)를 넘어갔을 때, 얼마나 되돌려야 하는지 계산합니다.
-        float loopOffset = parallaxMovementX % backgroundWidth;
+        // 2. 패럴랙스 이동량 계산 (배경이 움직여야 하는 거리)
+        // 배경은 카메라 이동량에 'parallaxEffect'를 곱한 만큼만 움직입니다.
+        // 이 거리를 기준으로 루프를 계산합니다.
+        float parallaxMovement = cameraDisplacement * parallaxEffect;
+
+        // 3. 무한 루프 오프셋 계산 (Modulo 연산)
+        // 배경의 총 이동량(패럴랙스 이동량)이 배경 너비를 몇 번 넘었는지 계산하여 오프셋을 만듭니다.
+        // % 연산은 C#에서 음수가 될 수 있으므로, 루프 위치를 backgroundWidth 내로 제한합니다.
+        float loopOffset = parallaxMovement % backgroundWidth;
         
         // C# Modulo 문제 해결:
         if (loopOffset < 0)
@@ -50,14 +58,13 @@ public class ParallaxScrolling : MonoBehaviour
             loopOffset += backgroundWidth;
         }
 
-        // 3. 최종 위치 설정
-        // New X = (카메라 X) + (카메라와의 초기 오프셋) - (패럴랙스 이동량)
-        // 위에서 계산한 loopOffset을 카메라 X 위치에 더하거나 빼서 배경을 고정시킵니다.
+        // 4. 최종 위치 설정
+        // New X = (배경 시작 X) + (카메라 이동량) - (패럴랙스 이동량) - (루프 오프셋)
+        // 최종 X = (배경 시작 X) + (카메라가 움직인 거리) - (루프 오프셋)
         
-        // [수정된 로직] 카메라의 X 위치에 루프 오프셋을 적용하고, 
-        // 패럴랙스 효과를 적용하여 최종 위치를 설정합니다.
+        // [핵심 공식] 최종 위치 = (카메라가 이동한 만큼의 현재 위치) - (루프 오프셋)
         transform.position = new Vector3(
-            cameraTransform.position.x + initialOffsetFromCamera - loopOffset,
+            backgroundStartX + cameraDisplacement - loopOffset, // ★ 배경의 최종 X 위치
             transform.position.y,
             transform.position.z
         );
